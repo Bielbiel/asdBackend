@@ -7,7 +7,6 @@ return userDAO.getAll()
 }
 function createUser(userData){
     userData.createData =new Date();
-    console.log(userData);
     userDAO.save(userData);
 }
 module.exports = {

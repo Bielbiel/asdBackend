@@ -1,6 +1,7 @@
 'use strict';
 
-const userMenager = require('../bizness/userMenager');
+const userMenager = require('../business/userMenager');
+const userJoi = require('./joi.schema');
 
 module.exports = function (server)
 {
@@ -13,7 +14,9 @@ module.exports = function (server)
         }
     });
     server.route({
-        method: 'POST', path: '/api/user', handler: function (request, reply)
+        method: 'POST', path: '/api/user', config: {validate: {
+            payload: userJoi.user
+        }}, handler: function (request, reply)
         {
             userMenager.createUser(request.payload);
             reply()
